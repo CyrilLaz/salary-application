@@ -1,0 +1,7 @@
+.form-container {
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto 25px;
+    display: flex;
+    position: relative;
+  }

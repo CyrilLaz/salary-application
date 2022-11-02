@@ -1,16 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Зарплата Доброфлот</title>
-    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
-    <link rel="stylesheet" href="../css/index.css">
+    <title>Профиль работника</title>
+    <!--<link rel="icon" type="image/svg+xml" href="../images/favicon.svg">-->
+    <link rel="stylesheet" href="../css/profile.css">
 </head>
-<body>
-    <h1>Страница профиля</h1>
+
+<body class="page">
+    <div class="page__container">
+        <header class="header">
+            <div class="header__logo"></div>
+        </header>
+        <main class="content">
+            <button class="profile-close">Выход</button>
+            <section class="profile">
+                <h1 class="profile__name">Фамилия Имя Отчество</h1>
+                <ul class="profile__info">
+                    <li class="profile__info-item profile__text">Всего заработано:
+                        <span class="profile__text" id="profileSalary">120 000 р</span>
+                    </li>
+                    <li class="profile__info-item profile__text">Всего часов:
+                        <span class="profile__text" id="profileHour">150 ч</span>
+                    </li>
+                </ul>
+            </section>
+            <section class="details">
+                <ul class="details__list">
+                </ul>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="footer__container">
+                <p class="footer__copyright">Сделано Кириллом</p>
+            </div>
+        </footer>
+
+        <template id="templateDetail">
+            <li class="detail">
+                <h3 class="detail__header">Консервный цех, бригада 1</h3>
+                <p class="detail__date">1.10.22 - 25.10.22</p>
+                <template id="templateDetailInfo">
+                    <div class="detail__info">
+                        <h4 class="detail__title">Разделка ручная (русские)</h4>
+                        <ul class="detail__list">
+                            <li class="detail__item detail__text">Часов:
+                                <span class="detail__text" id="detailHour">98,75</span>
+                            </li>
+                            <li class="detail__item detail__text">КТУ:
+                                <span class="detail__text" id="detailKtu">1.0</span>
+                            </li>
+                            <li class="detail__item detail__text">Итого:
+                                <span class="detail__text" id="detailTotal">38 614,98 </span>
+                            </li>
+                            <li class="detail__item detail__text">К начислению:
+                                <span class="detail__text" id="detailAccrual"> 45 043,43</span>
+                            </li>
+                            <li class="detail__item detail__text">Штраф:
+                                <span class="detail__text" id="detailFine">6 428,45</span>
+                            </li>
+                        </ul>
+                    </div>
+                </template>
+            </li>
+        </template>
+    </div>
     <script src="../profile.js"></script>
+    
 </body>
 
 </html>

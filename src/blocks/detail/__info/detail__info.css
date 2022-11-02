@@ -1,0 +1,12 @@
+.detail__info {
+    width: 100%;
+    background: #d9effc;
+    border-radius: 6px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 0 0 5px;
+  }
+
+  .detail__info:last-of-type {
+    margin: 0;
+  }

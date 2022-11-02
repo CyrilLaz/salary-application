@@ -1,0 +1,10 @@
+.info-box__container {
+    width: 90%;
+    background: #d9effc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+    box-sizing: border-box;
+  }

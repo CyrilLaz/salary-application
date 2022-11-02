@@ -1,0 +1,13 @@
+.form-container__loading {
+    width: 35px;
+    height: 35px;
+    background-image: url(../image/loading_spinner.gif);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 450%;
+    background-position: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: none;
+  }
