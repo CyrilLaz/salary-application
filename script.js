@@ -1,6 +1,10 @@
 const form = document.querySelector('#form');
 const inputs = form.querySelectorAll('.form__input');
 
+// ---------------------
+import {makeProfilePage} from "./profile.js"
+
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -9,15 +13,25 @@ form.addEventListener('submit', (e) => {
     return initial;
   }, {});
   let user = JSON.stringify({ firstName: firstName, secondName: secondName });
-  console.log(user);
-  let request = new XMLHttpRequest();
-  //посылаем запрос на адрес "/user"
-  request.open('POST', '/user', true);
-  request.setRequestHeader('Content-Type', 'application/json');
-  request.addEventListener('load', function () {
-    // получаем и парсим ответ сервера
-    let receivedUser = JSON.parse(request.response);
-    console.log(receivedUser); // смотрим ответ сервера
+  askServer(user).then(res=>res.json()).then(res=>{
+    
+    makeProfilePage(res);
+    console.log(res);
   });
-  request.send(user);
 });
+
+/*
+Купаев
+47ba8*/
+
+function askServer(data) {
+  return fetch('/user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: data
+  }).catch(err=>console.log(err))
+}
+
+
