@@ -17,7 +17,6 @@ app.get('/', function (request, response) {
 app.use('/', express.static(path.resolve('')));
 
 
-
 const jsonParser = express.json();
 app.post('/user', jsonParser, function (request, response) {
 
