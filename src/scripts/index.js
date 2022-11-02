@@ -8,16 +8,16 @@ import {makeProfilePage} from "./profile.js"
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const { firstName, secondName } = Array.from(inputs).reduce((initial, el) => {
-    initial[el.name] = el.value;
-    return initial;
-  }, {});
-  let user = JSON.stringify({ firstName: firstName, secondName: secondName });
-  askServer(user).then(res=>res.json()).then(res=>{
+  // const { firstName, secondName } = Array.from(inputs).reduce((initial, el) => {
+  //   initial[el.name] = el.value;
+  //   return initial;
+  // }, {});
+  // let user = JSON.stringify({ firstName: firstName, secondName: secondName });
+  // askServer(user).then(res=>res.json()).then(res=>{
     
-    makeProfilePage(res);
-    console.log(res);
-  });
+  //   makeProfilePage(res);
+  //   console.log(res);
+  // });
 });
 
 /*

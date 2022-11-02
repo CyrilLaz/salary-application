@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ServerForm</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body class="page">
+    <div class="page__container">
+        <header class="header">
+
+            <div class="header__logo"></div>
+        </header>
+        <main class="content">
+            <section class="form-container">
+                <form class="form" id="form">
+
+                    <input class="form__input" type="text" name="login" placeholder="Фамилия" />
+
+                    <input class="form__input" type="password" name="password" placeholder="Пароль" />
+                    <button type="submit" class="form__button">
+                        Войти
+                    </button>
+                </form>
+                <div class="form-container__error">
+                    <p class="form-container__text-error">Ошибка!</p>
+                </div>
+                <div class="form-container__loading"></div>
+            </section>
+            <section class="info-box">
+                <div class="info-box__container">
+                    <h2 class="info-box__header">Обновления:</h2>
+                    <ul class="info-box__list">
+                        <li class="info-box__item">
+                            <h3 class="info-box__department">Консервный цех:</h3>
+                            <span class="info-box__date" id="canned">1.10.22 - 25.10.22</span>
+                        </li>
+                        <li class="info-box__item">
+                            <h3 class="info-box__department">Коптильный цех:</h3>
+                            <span class="info-box__date" id="smoked">1.10.22 - 25.10.22</span>
+                        </li>
+                        <li class="info-box__item">
+                            <h3 class="info-box__department">Береговой цех:</h3>
+                            <span class="info-box__date" id="land">1.10.22 - 25.10.22</span>
+                        </li>
+                        <li class="info-box__item">
+                            <h3 class="info-box__department">Печеночный цех:</h3>
+                            <span class="info-box__date" id="liver">1.10.22 - 25.10.22</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="footer__container">
+                <p class="footer__copyright">Сделано Кириллом</p>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="./scripts/index.js">
+    </script>
+</body>
+
+</html>

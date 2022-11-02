@@ -6,7 +6,7 @@ const path = require('path');
 
 // console.log(path.resolve(''));
 // bd('Купаев', '47ba8').then(data=>console.log(data))
-const urlencodedParser = express.urlencoded({ extended: false });
+// const urlencodedParser = express.urlencoded({ extended: false });
 // определяем обработчик для маршрута "/"
 
 app.get('/', function (request, response) {
