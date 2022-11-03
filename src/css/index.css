@@ -22,9 +22,39 @@
 @import url(../blocks/info-box/__item/info-box__item.css);
 @import url(../blocks/info-box/__department/info-box__department.css);
 @import url(../blocks/info-box/__date/info-box__date.css);
+
+@import url(../blocks/profile-close/profile-close.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__text/profile__text.css);
+@import url(../blocks/profile/__info-item/profile__info-item.css);
+@import url(../blocks/details/details.css);
+@import url(../blocks/details/__list/details__list.css);
+@import url(../blocks/detail/detail.css);
+@import url(../blocks/detail/__header/detail__header.css);
+@import url(../blocks/detail/__date/detail__date.css);
+@import url(../blocks/detail/__info/detail__info.css);
+@import url(../blocks/detail/__title/detail__title.css);
+@import url(../blocks/detail/__text/detail__text.css);
+@import url(../blocks/detail/__item/detail__item.css);
+@import url(../blocks/detail/__list/detail__list.css);
+
+
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__container/footer__container.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+
+@import url(../blocks/initial-view/initial-view.css);
+@import url(../blocks/initial-view/_invisible/initial-view_invisible.css);
+
+@import url(../blocks/profile-view/profile-view.css);
+@import url(../blocks/profile-view/_invisible/profile-view_invisible.css);
+
+
+
+
 
 
 

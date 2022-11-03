@@ -12,54 +12,107 @@
 <body class="page">
     <div class="page__container">
         <header class="header">
-
             <div class="header__logo"></div>
         </header>
         <main class="content">
-            <section class="form-container">
-                <form class="form" id="form">
+            <div class="initial-view ">
+                <section class="form-container">
+                    <form class="form" id="form">
 
-                    <input class="form__input" type="text" name="login" placeholder="Фамилия" />
+                        <input class="form__input" type="text" name="login" placeholder="Фамилия" required/>
 
-                    <input class="form__input" type="password" name="password" placeholder="Пароль" />
-                    <button type="submit" class="form__button">
-                        Войти
-                    </button>
-                </form>
-                <div class="form-container__error">
-                    <p class="form-container__text-error">Ошибка!</p>
-                </div>
-                <div class="form-container__loading"></div>
-            </section>
-            <section class="info-box">
-                <div class="info-box__container">
-                    <h2 class="info-box__header">Обновления:</h2>
-                    <ul class="info-box__list">
-                        <li class="info-box__item">
-                            <h3 class="info-box__department">Консервный цех:</h3>
-                            <span class="info-box__date" id="canned">1.10.22 - 25.10.22</span>
+                        <input class="form__input" type="password" name="password" placeholder="Пароль" required/>
+                        <button type="submit" class="form__button">
+                            Войти
+                        </button>
+                    </form>
+                    <div class="form-container__error">
+                        <p class="form-container__text-error">Ошибка!</p>
+                    </div>
+                    <div class="form-container__loading"></div>
+                </section>
+                <section class="info-box">
+                    <div class="info-box__container">
+                        <h2 class="info-box__header">Обновления:</h2>
+                        <ul class="info-box__list">
+                            <li class="info-box__item">
+                                <h3 class="info-box__department">Консервный цех:</h3>
+                                <span class="info-box__date" id="canned"></span>
+                            </li>
+                            <li class="info-box__item">
+                                <h3 class="info-box__department">Коптильный цех:</h3>
+                                <span class="info-box__date" id="smoked"></span>
+                            </li>
+                            <li class="info-box__item">
+                                <h3 class="info-box__department">Береговой цех:</h3>
+                                <span class="info-box__date" id="land"></span>
+                            </li>
+                            <li class="info-box__item">
+                                <h3 class="info-box__department">Печеночный цех:</h3>
+                                <span class="info-box__date" id="liver"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            <!-- profile-view_invisible -->
+            <div class="profile-view profile-view_invisible">
+                <section class="profile">
+                    <button class="profile-close">Выход</button>
+                    <h1 class="profile__name" id="name">Фамилия Имя Отчество</h1>
+                    <ul class="profile__info">
+                        <li class="profile__info-item profile__text">Всего заработано:
+                            <span class="profile__text" id="totalSalary">120 000 р</span>
                         </li>
-                        <li class="info-box__item">
-                            <h3 class="info-box__department">Коптильный цех:</h3>
-                            <span class="info-box__date" id="smoked">1.10.22 - 25.10.22</span>
-                        </li>
-                        <li class="info-box__item">
-                            <h3 class="info-box__department">Береговой цех:</h3>
-                            <span class="info-box__date" id="land">1.10.22 - 25.10.22</span>
-                        </li>
-                        <li class="info-box__item">
-                            <h3 class="info-box__department">Печеночный цех:</h3>
-                            <span class="info-box__date" id="liver">1.10.22 - 25.10.22</span>
+                        <li class="profile__info-item profile__text">Всего часов:
+                            <span class="profile__text" id="totalHour">150 ч</span>
                         </li>
                     </ul>
-                </div>
-            </section>
+                </section>
+                <section class="details">
+                    <ul class="details__list">
+                    </ul>
+                </section>
+            </div>
+
         </main>
         <footer class="footer">
             <div class="footer__container">
                 <p class="footer__copyright">Сделано Кириллом</p>
             </div>
         </footer>
+
+        <template id="templateDetail">
+            <li class="detail">
+                <h3 class="detail__header">Консервный цех, бригада 1</h3>
+                <p class="detail__date">1.10.22 - 25.10.22</p>
+                <template id="templateDetailInfo">
+                    <div class="detail__info">
+                        <h4 class="detail__title">Разделка ручная (русские)</h4>
+                        <ul class="detail__list">
+                            <li class="detail__item detail__text">Часов:
+                                <span class="detail__text" id="detailHour">98,75</span>
+                            </li>
+                            <li class="detail__item detail__text">КТУ:
+                                <span class="detail__text" id="detailKtu">1.0</span>
+                            </li>
+                            <li class="detail__item detail__text">Премия:
+                                <span class="detail__text" id="detailBonus">6 428,45</span>
+                            </li>
+                            <li class="detail__item detail__text">К начислению:
+                                <span class="detail__text" id="detailAccrual"> 45 043,43</span>
+                            </li>
+                            <li class="detail__item detail__text">Штраф:
+                                <span class="detail__text" id="detailFine">6 428,45</span>
+                            </li>
+                            <li class="detail__item detail__text">Итого:
+                                <span class="detail__text" id="detailTotal">38 614,98 </span>
+                            </li>
+                        </ul>
+                    </div>
+                </template>
+            </li>
+        </template>
     </div>
     <script type="module" src="./scripts/index.js">
     </script>

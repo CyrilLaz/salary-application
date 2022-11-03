@@ -1,5 +1,8 @@
 .info-box__item {
     margin:0 0 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .info-box__item:last-of-type {
