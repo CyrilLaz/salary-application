@@ -12,7 +12,7 @@ import Profile from '../components/Profile.js';
 import { makeProfilePage } from './profile.js';
 
 const api = new Api({
-  baseUrl: 'http://klazar.online',
+  baseUrl: 'https://klazar.ru',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -16,7 +16,7 @@ export default class Api {
 
   getDates() {
 
-    return fetch(this.baseUrl+'/dates'
+    return fetch(this.baseUrl+'/dates',
     ).then(this._checkResponce());
   }
 
