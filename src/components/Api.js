@@ -1,5 +1,3 @@
-const url = 'https://jsonplaceholder.typicode.com/posts';
-const method = 'POST';
 
 export default class Api {
   constructor({ baseUrl, headers }) {
@@ -17,20 +15,9 @@ export default class Api {
   }
 
   getDates() {
-    const date = {
-      canned: ['2022-09-30T14:00:00.000Z', '2022-10-16T14:00:00.000Z'],
-      smoked: ['2022-09-30T14:00:00.000Z', '2022-10-16T14:00:00.000Z'],
-      land: ['2022-09-30T14:00:00.000Z', '2022-10-16T14:00:00.000Z'],
-      liver: ['2022-09-30T14:00:00.000Z', '2022-10-16T14:00:00.000Z'],
-    };
 
-    return fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(date),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    }).then(this._checkResponce());
+    return fetch(this.baseUrl+'/dates'
+    ).then(this._checkResponce());
   }
 
   sendRespond (data) {
@@ -44,7 +31,8 @@ export default class Api {
   }
 
 
-  getProfile() {
+  getProfile(data) {
+    console.log(data);
     const workerObj = JSON.parse(`{
       "name": "Финченко Олеся Александровна",
       "login": "Финченко",
@@ -89,9 +77,21 @@ export default class Api {
         }
       ]
     }`)
-    return fetch(url, {
+    return fetch(this.baseUrl+'/user', {
       method: 'POST',
-      body: JSON.stringify(workerObj),
+      body: JSON.stringify(data),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    }).then(this._checkResponce());
+  }
+
+  getProfileByName(data) {
+    console.log(data);
+
+    return fetch(this.baseUrl+'/worker', {
+      method: 'POST',
+      body: JSON.stringify(data),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },

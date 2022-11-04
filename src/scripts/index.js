@@ -12,32 +12,34 @@ import Profile from '../components/Profile.js';
 import { makeProfilePage } from './profile.js';
 
 const api = new Api({
-  baseUrl: 'https://jsonplaceholder.typicode.com/posts',
+  baseUrl: 'http://194.67.126.230:3000',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-api.getDates().then(res=>dateContainer.setDate(res));
+api.getDates().then((res) => {
+  infoContainer.setDate(res);
+});
 
-const dateContainer = new Section(
-  ['canned','smoked','land','liver'],
-  ['name','totalSalary','totalHour'],
+const infoContainer = new Section(
+  ['canned', 'smoked', 'land', 'liver'],
+  ['name', 'totalSalary', 'totalHour'],
   '.details__list'
 );
 
-const blocks = new Blocks(
-  {form:'.initial-view',
-  profile:'.profile-view',
-error:'.form-container__error',
-loadingIcon:'.form-container__loading'}
-)
+const blocks = new Blocks({
+  form: '.initial-view',
+  profile: '.profile-view',
+  error: '.form-container__error',
+  loadingIcon: '.form-container__loading',
+});
 
-closeProfileButton.addEventListener('click',()=>{
+closeProfileButton.addEventListener('click', () => {
   blocks.hideProfile();
   form.reset();
-  dateContainer.resetProfile();
-})
+  infoContainer.resetProfile();
+});
 
 // const profile = new Profile(workerObj,{
 //   main:'#templateDetail',
@@ -56,40 +58,42 @@ form.addEventListener('submit', (e) => {
     initial[el.name] = el.value;
     return initial;
   }, {});
-
-  // console.log(inputs.);
-  api.getProfile().then(res=>{
-
-    const profile = new Profile(res,{
-      main:'#templateDetail',
-      inner:'#templateDetailInfo'
+  console.log(user.login);
+  api
+    .getProfileByName({ name: user.login })
+    .then((res) => {
+      const profile = new Profile(res, {
+        main: '#templateDetail',
+        inner: '#templateDetailInfo',
+      });
+      infoContainer.addItems(profile.getDetailCards());
+      infoContainer.setProfile(profile.getProfileInfo());
+      blocks.showProfile();
+      blocks.showLoading();
+    })
+    .catch((err) => {
+      blocks.showError();
+      console.log(err);
     });
-    dateContainer.addItems(profile.getDetailCards())
-    dateContainer.setProfile(profile.getProfileInfo());
-    blocks.showProfile()
-    blocks.showLoading();
-  }).catch(err=>{
-    blocks.showError();
-    console.log(err);})
+  //-------------
+  // console.log(inputs.);
+  // api.getProfile(user).then(res=>{
 
-    
+  //   const profile = new Profile(res,{
+  //     main:'#templateDetail',
+  //     inner:'#templateDetailInfo'
+  //   });
+  //   infoContainer.addItems(profile.getDetailCards())
+  //   infoContainer.setProfile(profile.getProfileInfo());
+  //   blocks.showProfile()
+  //   blocks.showLoading();
+  // }).catch(err=>{
+  //   blocks.showError();
+  //   console.log(err);})
+
   // askServer(user).then(res=>res.json()).then(res=>{
 
   //   makeProfilePage(res);
   //   console.log(res);
   // });
 });
-
-// /*
-// Купаев
-// 47ba8*/
-
-// function askServer(data) {
-//   return fetch('/user', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: data
-//   }).catch(err=>console.log(err))
-// }
