@@ -1,7 +1,8 @@
 export default class Api {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl, headers, mode }) {
     this.baseUrl = baseUrl;
     this.headers = headers;
+    this.mode = mode;
   }
 
   _checkResponce() {
@@ -14,12 +15,13 @@ export default class Api {
   }
 
   getDates() {
-    return fetch(this.baseUrl + '/dates').then(this._checkResponce());
+    return fetch(this.baseUrl + '/dates',{mode: this.mode,}).then(this._checkResponce());
   }
 
   sendRespond(data) {
     return fetch(url, {
       method: 'POST',
+      mode: this.mode,
       body: JSON.stringify(data),
       headers: {
         ...this.headers,
@@ -32,6 +34,7 @@ export default class Api {
     const workerObj = JSON.parse();
     return fetch(this.baseUrl + '/user', {
       method: 'POST',
+      mode: this.mode,
       body: JSON.stringify(data),
       headers: {
         ...this.headers,
@@ -42,6 +45,7 @@ export default class Api {
   getProfileByName(data) {
     return fetch(this.baseUrl + '/worker', {
       method: 'POST',
+      mode: this.mode,
       body: JSON.stringify(data),
       headers: {
         ...this.headers,
