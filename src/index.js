@@ -2,21 +2,16 @@ const form = document.querySelector('#form');
 const inputs = form.querySelectorAll('.form__input');
 const closeProfileButton = document.querySelector('.profile-close');
 
-import Blocks from '../components/Blocks.js';
-import Api from '../components/Api.js';
-import Section from '../components/Section.js';
+import Blocks from './components/Blocks.js';
+import Api from './components/Api.js';
+import Section from './components/Section.js';
 // import workerObj from '../constants/worker.js';
-
-import Profile from '../components/Profile.js';
+import './index.css';
+import Profile from './components/Profile.js';
 // ---------------------
-import { makeProfilePage } from './profile.js';
+import connectServer from './constants/connectServer.js';
 
-const api = new Api({
-  baseUrl: 'https://klazar.ru',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+const api = new Api(connectServer);
 
 api.getDates().then((res) => {
   infoContainer.setDate(res);

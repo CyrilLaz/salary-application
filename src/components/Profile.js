@@ -5,28 +5,31 @@ export default class Profile {
     this.template = document.querySelector(this.selectors.main).content;
     this.detail = this.template.querySelector('.detail');
     this.innerTemplate = this.detail.querySelector(this.selectors.inner);
-    this.detailInfo = this.innerTemplate
-      .content.querySelector('.detail__info');
+    this.detailInfo = this.innerTemplate.content.querySelector('.detail__info');
   }
-
 
   getProfileInfo() {
     const total = this._countTotal();
-return {name:this.data.name, totalHour: total.totalHour, totalSalary: total.totalSalary}
+    return {
+      name: this.data.name,
+      totalHour: total.totalHour,
+      totalSalary: total.totalSalary,
+    };
   }
 
-_countTotal() {
-  let totalSalary =0, totalHour =0;
-this.data.details.forEach(el=>{
-  el.spots.forEach(spot=>{
-    totalHour=totalHour+spot.hours;
-    totalSalary=totalSalary+spot.accrual + spot.bonus - spot.fine
-  })
-})
-totalSalary = Math.floor(totalSalary);
+  _countTotal() {
+    let totalSalary = 0,
+      totalHour = 0;
+    this.data.details.forEach((el) => {
+      el.spots.forEach((spot) => {
+        totalHour = totalHour + spot.hours;
+        totalSalary = totalSalary + spot.accrual + spot.bonus - spot.fine;
+      });
+    });
+    totalSalary = Math.floor(totalSalary);
 
-  return {totalSalary,totalHour}
-}
+    return { totalSalary, totalHour };
+  }
 
   getDetailCards() {
     const cards = this.data.details.map((element) => this._createCard(element));
@@ -34,7 +37,6 @@ totalSalary = Math.floor(totalSalary);
   }
 
   _createCard(element) {
-
     const card = this.detail.cloneNode(true);
     card.removeChild(card.querySelector(this.selectors.inner));
     const cardHeader = card.querySelector('.detail__header');
@@ -46,8 +48,6 @@ totalSalary = Math.floor(totalSalary);
     element.spots.forEach((spot) => card.append(this._createSpotInfo(spot)));
     return card;
   }
-
-  
 
   _createSpotInfo(element) {
     const spot = this.detailInfo.cloneNode(true);
