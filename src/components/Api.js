@@ -28,9 +28,9 @@ export default class Api {
     }).then(this._checkResponce());
   }
 
-  getProfile(data) {
+  login(data) {
 
-    const workerObj = JSON.parse();
+
     return fetch(this.baseUrl + '/user', {
       method: 'POST',
       body: JSON.stringify(data),
