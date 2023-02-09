@@ -53,11 +53,15 @@ form.addEventListener('submit', (e) => {
     initial[el.name] = el.value;
     return initial;
   }, {});
-  console.log(user.login);
+  console.log(user);
+
+
+
   api
-    .getProfileByName({ name: user.login })
-    .then((res) => {
-      const profile = new Profile(res, {
+    .login(user)
+    .then(({data}) => {
+      console.log(data);
+      const profile = new Profile(data, {
         main: '#templateDetail',
         inner: '#templateDetailInfo',
       });
@@ -70,6 +74,22 @@ form.addEventListener('submit', (e) => {
       blocks.showError();
       console.log(err);
     });
+  // api
+  //   .getProfileByName({ name: user.login })
+  //   .then((res) => {
+  //     const profile = new Profile(res, {
+  //       main: '#templateDetail',
+  //       inner: '#templateDetailInfo',
+  //     });
+  //     infoContainer.addItems(profile.getDetailCards());
+  //     infoContainer.setProfile(profile.getProfileInfo());
+  //     blocks.showProfile();
+  //     blocks.showLoading();
+  //   })
+  //   .catch((err) => {
+  //     blocks.showError();
+  //     console.log(err);
+  //   });
   //-------------
   // console.log(inputs.);
   // api.getProfile(user).then(res=>{

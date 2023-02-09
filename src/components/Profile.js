@@ -20,11 +20,9 @@ export default class Profile {
   _countTotal() {
     let totalSalary = 0,
       totalHour = 0;
-    this.data.details.forEach((el) => {
-      el.spots.forEach((spot) => {
-        totalHour = totalHour + spot.hours;
-        totalSalary = totalSalary + spot.accrual + spot.bonus - spot.fine;
-      });
+    this.data.spot.forEach((el) => {
+      totalHour = totalHour + el.hours;
+      totalSalary = totalSalary + el.accrual + el.bonus - el.fine;
     });
     totalSalary = Math.floor(totalSalary);
 
@@ -32,20 +30,22 @@ export default class Profile {
   }
 
   getDetailCards() {
-    const cards = this.data.details.map((element) => this._createCard(element));
+    const cards = this.data.spot.map((element) => this._createCard(element));
     return cards;
   }
-
+  
   _createCard(element) {
+    // console.log('###',element);
+
     const card = this.detail.cloneNode(true);
     card.removeChild(card.querySelector(this.selectors.inner));
     const cardHeader = card.querySelector('.detail__header');
     const dateHeader = card.querySelector('.detail__date');
-    cardHeader.textContent = `${element.department}, бригада ${element.brigade}`;
+    cardHeader.textContent = `${element.department.name}, бригада ${element.department.brigade}`;
 
     dateHeader.textContent = this._createDate(element.period);
 
-    element.spots.forEach((spot) => card.append(this._createSpotInfo(spot)));
+    card.append(this._createSpotInfo(element));
     return card;
   }
 
@@ -59,7 +59,7 @@ export default class Profile {
     const detailFine = spot.querySelector('#detailFine');
     const detailBonus = spot.querySelector('#detailBonus');
 
-    spotTitle.textContent = element.spot;
+    spotTitle.textContent = element.name;
     detailHour.textContent = element.hours;
     detailKtu.textContent = element.ktu;
     detailTotal.textContent = Math.floor(
@@ -72,9 +72,10 @@ export default class Profile {
     return spot;
   }
 
-  _createDate(element) {
-    const dateFrom = new Date(Date.parse(element[0]));
-    const dateTo = new Date(Date.parse(element[1]));
+  _createDate({from,till}) {
+    console.log(from,till);
+    const dateFrom = new Date(from);
+    const dateTo = new Date(till);
     return `${dateFrom.getDate()}.${
       dateFrom.getMonth() + 1
     }.${dateFrom.getFullYear()} - ${dateTo.getDate()}.${

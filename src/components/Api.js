@@ -29,9 +29,7 @@ export default class Api {
   }
 
   login(data) {
-
-
-    return fetch(this.baseUrl + '/user', {
+    return fetch(this.baseUrl + '/signin', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
