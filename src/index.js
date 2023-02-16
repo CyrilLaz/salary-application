@@ -20,17 +20,22 @@ api
   })
   .catch(console.log);
 
-Promise.all([api.getName(),api.getInitialData()]).then(([name, data])=>{
-if(name&&data) {
-  const profile = new Profile({...name,...data}, {
-    main: '#templateDetail',
-    inner: '#templateDetailInfo',
-  });
-  infoContainer.addItems(profile.getDetailCards());
-  infoContainer.setProfile(profile.getProfileInfo());
-  blocks.showProfile();
-}
-}).catch(console.log)
+Promise.all([api.getName(), api.getInitialData()])
+  .then(([name, data]) => {
+    if (name && data) {
+      const profile = new Profile(
+        { ...name, ...data },
+        {
+          main: '#templateDetail',
+          inner: '#templateDetailInfo',
+        }
+      );
+      infoContainer.addItems(profile.getDetailCards());
+      infoContainer.setProfile(profile.getProfileInfo());
+      blocks.showProfile();
+    }
+  })
+  .catch(console.log);
 
 const infoContainer = new Section(
   ['canned', 'smoked', 'land', 'liver'],
@@ -46,9 +51,11 @@ const blocks = new Blocks({
 });
 
 closeProfileButton.addEventListener('click', () => {
-  blocks.hideProfile();
-  form.reset();
-  infoContainer.resetProfile();
+  return api.logout().then(() => {
+    blocks.hideProfile();
+    form.reset();
+    infoContainer.resetProfile();
+  });
 });
 
 form.addEventListener('submit', (e) => {
@@ -78,7 +85,6 @@ form.addEventListener('submit', (e) => {
         blocks.showProfile();
         blocks.showLoading();
       });
-
     })
     .catch((err) => {
       blocks.showError();

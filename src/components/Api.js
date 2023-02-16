@@ -45,6 +45,15 @@ export default class Api {
       },
     }).then(this._checkResponce());
   }
+logout() {
+  return fetch(this.baseUrl + '/signout', {
+    method: 'DELETE',
+    credentials : 'include',
+    headers: {
+      ...this.headers,
+    },
+  }).then(this._checkResponce());
+}
 
   getProfileByName(data) {
     return fetch(this.baseUrl + '/worker', {
