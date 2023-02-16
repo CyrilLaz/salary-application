@@ -13,9 +13,24 @@ import connectServer from './constants/connectServer.js';
 
 const api = new Api(connectServer);
 
-api.getDates().then((res) => {
-  infoContainer.setDate(res);
-});
+api
+  .getDates()
+  .then((res) => {
+    infoContainer.setDate(res);
+  })
+  .catch(console.log);
+
+Promise.all([api.getName(),api.getInitialData()]).then(([name, data])=>{
+if(name&&data) {
+  const profile = new Profile({...name,...data}, {
+    main: '#templateDetail',
+    inner: '#templateDetailInfo',
+  });
+  infoContainer.addItems(profile.getDetailCards());
+  infoContainer.setProfile(profile.getProfileInfo());
+  blocks.showProfile();
+}
+}).catch(console.log)
 
 const infoContainer = new Section(
   ['canned', 'smoked', 'land', 'liver'],
@@ -36,16 +51,6 @@ closeProfileButton.addEventListener('click', () => {
   infoContainer.resetProfile();
 });
 
-// const profile = new Profile(workerObj,{
-//   main:'#templateDetail',
-//   inner:'#templateDetailInfo'
-// })
-
-// console.log(profile.getProfileInfo());
-
-// profile.getDetailCards();
-// console.log(profile.getDetailCards());
-
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   blocks.showLoading();
@@ -55,60 +60,28 @@ form.addEventListener('submit', (e) => {
   }, {});
   console.log(user);
 
-
-
   api
     .login(user)
-    .then(({data}) => {
-      console.log(data);
-      const profile = new Profile(data, {
-        main: '#templateDetail',
-        inner: '#templateDetailInfo',
+    .then((user) => {
+      if (!user) throw e;
+
+      api.getInitialData().then((data) => {
+        const profile = new Profile(
+          { ...data, user },
+          {
+            main: '#templateDetail',
+            inner: '#templateDetailInfo',
+          }
+        );
+        infoContainer.addItems(profile.getDetailCards());
+        infoContainer.setProfile(profile.getProfileInfo());
+        blocks.showProfile();
+        blocks.showLoading();
       });
-      infoContainer.addItems(profile.getDetailCards());
-      infoContainer.setProfile(profile.getProfileInfo());
-      blocks.showProfile();
-      blocks.showLoading();
+
     })
     .catch((err) => {
       blocks.showError();
       console.log(err);
     });
-  // api
-  //   .getProfileByName({ name: user.login })
-  //   .then((res) => {
-  //     const profile = new Profile(res, {
-  //       main: '#templateDetail',
-  //       inner: '#templateDetailInfo',
-  //     });
-  //     infoContainer.addItems(profile.getDetailCards());
-  //     infoContainer.setProfile(profile.getProfileInfo());
-  //     blocks.showProfile();
-  //     blocks.showLoading();
-  //   })
-  //   .catch((err) => {
-  //     blocks.showError();
-  //     console.log(err);
-  //   });
-  //-------------
-  // console.log(inputs.);
-  // api.getProfile(user).then(res=>{
-
-  //   const profile = new Profile(res,{
-  //     main:'#templateDetail',
-  //     inner:'#templateDetailInfo'
-  //   });
-  //   infoContainer.addItems(profile.getDetailCards())
-  //   infoContainer.setProfile(profile.getProfileInfo());
-  //   blocks.showProfile()
-  //   blocks.showLoading();
-  // }).catch(err=>{
-  //   blocks.showError();
-  //   console.log(err);})
-
-  // askServer(user).then(res=>res.json()).then(res=>{
-
-  //   makeProfilePage(res);
-  //   console.log(res);
-  // });
 });

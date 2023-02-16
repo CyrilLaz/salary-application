@@ -7,7 +7,7 @@ export default class Profile {
     this.innerTemplate = this.detail.querySelector(this.selectors.inner);
     this.detailInfo = this.innerTemplate.content.querySelector('.detail__info');
   }
-
+  
   getProfileInfo() {
     const total = this._countTotal();
     return {
@@ -16,20 +16,21 @@ export default class Profile {
       totalSalary: total.totalSalary,
     };
   }
-
+  
   _countTotal() {
     let totalSalary = 0,
-      totalHour = 0;
+    totalHour = 0;
     this.data.spot.forEach((el) => {
       totalHour = totalHour + el.hours;
       totalSalary = totalSalary + el.accrual + el.bonus - el.fine;
     });
     totalSalary = Math.floor(totalSalary);
-
+    
     return { totalSalary, totalHour };
   }
-
+  
   getDetailCards() {
+    console.log(this.data.name,"###",this.data.spot);
     const cards = this.data.spot.map((element) => this._createCard(element));
     return cards;
   }

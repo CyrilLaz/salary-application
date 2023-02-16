@@ -7,7 +7,7 @@ export default class Api {
   _checkResponce() {
     return (res) => {
       if (res.ok) {
-        return res.json();
+        return res.json().then(({data})=>data);
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     };
@@ -17,11 +17,18 @@ export default class Api {
     return fetch(this.baseUrl + '/dates').then(this._checkResponce());
   }
 
-  sendRespond(data) {
-    return fetch(url, {
-      method: 'POST',
-      mode: this.mode,
-      body: JSON.stringify(data),
+  getName() {
+    return fetch(this.baseUrl + '/user', {
+      credentials : 'include',
+      headers: {
+        ...this.headers,
+      },
+    }).then(this._checkResponce());
+  }
+
+  getInitialData() {
+    return fetch(this.baseUrl + '/spots', {
+      credentials : 'include',
       headers: {
         ...this.headers,
       },
@@ -32,6 +39,7 @@ export default class Api {
     return fetch(this.baseUrl + '/signin', {
       method: 'POST',
       body: JSON.stringify(data),
+      credentials : 'include',
       headers: {
         ...this.headers,
       },
@@ -42,6 +50,7 @@ export default class Api {
     return fetch(this.baseUrl + '/worker', {
       method: 'POST',
       body: JSON.stringify(data),
+      credentials : 'include',
       headers: {
         ...this.headers,
       },
