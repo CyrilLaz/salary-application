@@ -60,12 +60,11 @@ closeProfileButton.addEventListener('click', () => {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  blocks.showLoading();
+  blocks.toggleLoading();
   const user = Array.from(inputs).reduce((initial, el) => {
     initial[el.name] = el.value;
     return initial;
   }, {});
-  console.log(user);
 
   api
     .login(user)
@@ -83,11 +82,16 @@ form.addEventListener('submit', (e) => {
         infoContainer.addItems(profile.getDetailCards());
         infoContainer.setProfile(profile.getProfileInfo());
         blocks.showProfile();
-        blocks.showLoading();
+        blocks.toggleLoading();
       });
     })
     .catch((err) => {
-      blocks.showError();
-      console.log(err);
+      if (err.status === 401) {
+        blocks.toggleError('Не правильный логин или пароль');
+      } else {
+        blocks.toggleError('Что-то пошло не так');
+      }
+      blocks.toggleLoading();
+      setTimeout(() => blocks.toggleError(), 4000);
     });
 });

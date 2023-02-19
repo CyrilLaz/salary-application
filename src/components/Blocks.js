@@ -11,12 +11,13 @@ export default class Blocks {
     this.profile.classList.remove('profile-view_invisible');
   }
 
-  showLoading() {
+  toggleLoading() {
     this.loadingIcon.classList.toggle('form-container__loading_visible');
   }
 
-  showError() {
+  toggleError(text) {
     this.error.classList.toggle('form-container__error_visible');
+    this.error.querySelector('.form-container__text-error').textContent = text;
   }
 
   hideProfile() {
